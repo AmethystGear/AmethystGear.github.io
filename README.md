@@ -1,2 +1,2 @@
 # AmethystGear.github.io
-personal website
+for my own stuff
