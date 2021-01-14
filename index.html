@@ -30,82 +30,58 @@
 	  transition: opacity 1s ease-in-out;
 	}
 
-	#center #top_wolf:hover {
+	#top_wolf:hover {
 	  opacity:0;
 	}
 	
-	#center .moon {
+	.moon {
 	    position:absolute;
 	    width:50%;
 	    height:auto;
 	}
 	
-	#center #moon-right {
+	#moon-right {
 	    left:100%;
 	    margin-top:-50%;
 	}
 	
-        #center #moon-left {
+        #moon-left {
 	    left:-50%;
 	    margin-top:-50%;
 	}
 
-	
+	.woofwoof {
+	    width: 50%;
+	    position:absolute;
+	    margin-top:-80%;
+	}
     </style>
 </head>
 <body>
-  <div id="center">
+  <div id="center" onclick="make_noise()">
     
-    <img id= "bottom_wolf" class="wolf" src="wolf.png" />
+    <img id= "bottom_wolf" class="wolf" src="wolf.png"  />
     <img id= "top_wolf" class="wolf" src="wolf_grey.png" />
     <img id= "moon-right" class= "moon" src="moon.png"/>
     <img id= "moon-left" class= "moon" src="moon.png"/>
+    <img id= "woofwoof" class= "woofwoof" src="woof_woof.png"/>
   </div>
 </div>
 </body>
 <script type="text/javascript">
-var usedNumbers = [];
-function changeImage() {
-    var image = "rock_quotes/image";
-    var number = Math.floor(Math.random() * 18);
-    if (usedNumbers.length == 18) {
-    	usedNumbers = [];
-    }
-    while (usedNumbers.includes(number)) {
-        number = Math.floor(Math.random() * 18);
-    }
-    usedNumbers.push(number);
-    document.getElementById("img").src = image + number;
+function setImageVisible(id, visible) {
+    var img = document.getElementById(id);
+    img.style.visibility = (visible ? 'visible' : 'hidden');
 }
 
-var adjectives = ["Cool", "Cute", "Adorable", "Awesome", "Funny"];
+var current = "woofwoof";
+function make_noise() {
+   setImageVisible(current, true);
+   setTimeout(function() { setImageVisible(current, false); }, 250);
 
-function changeButton() {
-    document.getElementById("button").innerText = "Gimme Another " + adjectives[Math.floor(Math.random() * adjectives.length)] + " Rock Quote!";
 }
 
-function onButtonClick() {
-    changeButton();
-    changeImage();
-}
-
-var animateButton = function(e) {
-
-  e.preventDefault;
-  //reset animation
-  e.target.classList.remove('animate');
-  
-  e.target.classList.add('animate');
-  setTimeout(function(){
-    e.target.classList.remove('animate');
-  },700);
-};
-
-var bubblyButtons = document.getElementsByClassName("bubbly-button");
-
-for (var i = 0; i < bubblyButtons.length; i++) {
-  bubblyButtons[i].addEventListener('click', animateButton, false);
-}
+document.onload = setImageVisible(current, false);
 </script>
 </html>
 
